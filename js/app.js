@@ -10,8 +10,8 @@ const ctx = canvas.getContext('2d');
 
 
 /* settings */
-canvas.width = 400
-canvas.height = 650
+canvas.width = window.innerWidth
+canvas.height = window.innerHeight -5
 const canvasHeightPlus = 150
 
 const cookieSizeNumb = 250
@@ -36,12 +36,13 @@ const cookieFallSizeRange = 10
 const cookieFallSpeed = 2
 
 const radiantSrc = './img/radiant.png'
-const radiantSize = 650
+const radiantOpacity = 2.45
+const radiantSize = 850
 const rotateSpeed = 0.5
 
-const radiant = new Radiant(radiantSrc,canvas.width,canvas.height, radiantSize, canvasHeightPlus,rotateSpeed)
-const score = new Score(scorePoints, scoreValue, scoreDiv)
-const cooke = new Cookie(cookieSrc,cookieSize.width, cookieSize.height, canvas.width, (canvas.height+canvasHeightPlus),cookieScale,scaleSpeed)
+let radiant = new Radiant(radiantSrc,canvas.width,canvas.height, radiantSize, canvasHeightPlus,rotateSpeed,radiantOpacity)
+let score = new Score(scorePoints, scoreValue, scoreDiv)
+let cooke = new Cookie(cookieSrc,cookieSize.width, cookieSize.height, canvas.width, (canvas.height+canvasHeightPlus),cookieScale,scaleSpeed)
 
 const mouse = {click: false};
 
@@ -70,6 +71,15 @@ canvas.addEventListener('mouseup', e => {
     cookieFall.push(new CookieFall(canvas.width,canvas.height, cookieSrc,cookieFallSize, cookieFallSizeRange, cookieFallSpeed))
     plusnumb.push(new Plusnumb(scoreValue,plusnumbFont, plusnumbFontSize,plusnumbWeight, x,  y, plusnumbSpeed, plusnumbUpRange))
   }
+})
+
+window.addEventListener('resize', e => {
+  canvas.width = window.innerWidth
+  canvas.height = window.innerHeight -5
+
+  radiant = new Radiant(radiantSrc,canvas.width,canvas.height, radiantSize, canvasHeightPlus,rotateSpeed,radiantOpacity)
+  score = new Score(scorePoints, scoreValue, scoreDiv)
+  cooke = new Cookie(cookieSrc,cookieSize.width, cookieSize.height, canvas.width, (canvas.height+canvasHeightPlus),cookieScale,scaleSpeed)
 })
 
 /* engine */

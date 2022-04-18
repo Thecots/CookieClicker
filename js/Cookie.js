@@ -79,7 +79,7 @@ class CookieFall{
 }
 
 class Radiant{
-  constructor(src,canvasWidth,canvasHeight, size, canvasHeightPlus,rotateSpeed){
+  constructor(src,canvasWidth,canvasHeight, size, canvasHeightPlus,rotateSpeed, opacity){
     this.src = src
     this.canvasWidth = canvasWidth
     this.canvasHeight = canvasHeight
@@ -88,13 +88,14 @@ class Radiant{
     this.canvasHeightPlus = canvasHeightPlus
     this.rotate = 1
     this.rotateSpeed = rotateSpeed
+    this.opacity = opacity
   }
   
   draw(ctx){
     let img = new Image()
     img.src = this.src
     ctx.save()
-    ctx.globalAlpha = 0.45
+    ctx.globalAlpha = this.opacity
     ctx.translate(this.canvasWidth/2,(this.canvasHeight+this.canvasHeightPlus)/2)
     this.rotate -= this.rotateSpeed*100
     ctx.rotate(this.rotate)
